@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block content%}
+
+<div class="container">
+  <div class="row">
+     
+          <div class="col-md-6 offset-md-3">
+    <strong><h1>Checkout</h1></strong>
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn" type="submit">Place Order</button>
+  </form>
+
+</div>
+        
+</div>  
+</div>  
+<br>
+<br>
+<br>
+
+
+{% endblock %}

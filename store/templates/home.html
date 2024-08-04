@@ -1,0 +1,74 @@
+{%extends 'base.html'%}
+{%block content%}
+
+
+    <!-- All Products -->
+    
+
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>All Products</h2>
+            <select>
+                <option>Default Sort</option>
+                <option>Sort By Price</option>
+                <option>Sort By Popularity</option>
+                <option>Sort By Rating</option>
+                <option>Sort By Sale</option>
+            </select>
+        </div>
+        
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"">
+            {% for product in products %}
+            {% if product.on_sale %}
+            <div class="col-4">
+            
+                <a href="{% url 'product' product.id %}"><i class="badge bg-dark text-white position-absolute" style="top: 0.5rem;right: 0.5rem;">
+                                Sale 
+                            </i>  <img class="card-img-top" src="{{product.image.url}}"></a>
+                <h4>{{product.name}}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <div class="d-flex justify-content-center small-text-warning mb-2">
+                    <i class="bi-star-fill"></i>
+                    &nbsp;&nbsp;offer!&nbsp;&nbsp;
+                    <i class="bi-star-fill"></i>
+                </div>
+                  <!-- Product price-->
+                   <strike>Ksh.{{product.price}}</strike>
+                   &nbsp;Ksh.{{product.sale_price}}
+                
+              
+            </div>
+            {% else %}
+            
+            <div class="col-4">
+                <a href="{% url 'product' product.id %}"> <img class="card-img-top" src="{{product.image.url}}"></a>
+                <h4>{{product.name}}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>Ksh.{{product.price}}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            
+        <div class="page-btn">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>&#8594;</span>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

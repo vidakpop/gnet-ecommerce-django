@@ -1,0 +1,66 @@
+{% load static %}
+<style>
+    .cart-link {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .cart-counter {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 0 5px;
+        font-size: 12px;
+        line-height: 20px;
+        min-width: 20px;
+        text-align: center;
+    }
+    </style>
+    
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{% url 'index' %}"><img src="{% static 'images/logo.png'%}" alt="logo" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="nav-item dropdown">
+                                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'home' %}">All Products</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+            {% for category in categories %}
+                <li><a class="dropdown-item" href="{% url 'category' category.name %}">{{ category.name }}</a></li>
+            {% endfor %}
+                        </ul>
+                        <li><a href="">About</a></li>
+                        <li><a href="/#contact" class="nav-link">Contact</a></li>
+                        <li><a href="{% url 'login' %}">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="{% url 'cart_summary' %}" class="cart-link">
+                    <img src="{% static 'images/cart.png' %}" width="30px" height="30px">
+                    <span class="cart-counter">{{cart|length}}</span>
+                </a>
+                <img src="{%static 'images/menu.png'%}" class="menu-icon" onclick="menutoggle()">
+            </div>
+            </div>
+            
+        
+        <div class="row">
+            <div class="col-2">
+                <h1>Experience Fast and Reliable Internet with GNET!</h1>
+                <p>Providing top-notch internet services, installation, and maintenance. Discover our range of internet products and services.</p>
+                <a href="{% url 'home' %}" class="btn">Explore Now &#8594;</a>
+            </div>
+            <div class="col-2">
+                <img src="{%static 'images/cables.png'%}"alt="Internet Services">
+            </div>
+        </div>
+    </div>
+</div>

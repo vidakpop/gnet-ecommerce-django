@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{%block content%}
+
+
+
+    <!-- Cart items details -->
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="{{product.image.url}}">
+                        <div>
+                            <p>{{product.name}}</p>
+                            
+                            <br>
+                            <a href="">Remove</a>
+                        </div>
+                    </div>
+                </td>
+                <td><p class="card-text justify-content-center">{{product.description}}</p></td>
+                <td>$50.00</td>
+            </tr>
+            
+            
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td>$200.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>$35.00</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>$230.00</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+ {% endblock %}   

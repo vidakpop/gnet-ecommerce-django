@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Featured Categories -->
+<div class="categories">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-3">
+                <img src="{% static 'images/fast.jpeg'%}" alt="High Speed Internet">
+                <h3>High Speed Internet</h3>
+            </div>
+            <div class="col-3">
+                <img src="{% static 'images/installation.png'%}" alt="Installation Services">
+                <h3>Installation Services</h3>
+            </div>
+            <div class="col-3">
+                <img src="{% static 'images/maintainance.png'%}" alt="Maintenance">
+                <h3>Maintenance</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features of GNET -->
+<div class="small-container">
+    <h2 class="title">Our Features</h2>
+    <div class="row">
+        <div class="col-4">
+            <img src="{% static 'images/speed.png'%}" alt="Fast and Reliable Internet">
+            <h4>Fast and Reliable Internet</h4>
+            <p>Experience lightning-fast internet speeds with GNET's reliable network.</p>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/installation.jpeg'%}" alt="Professional Installation">
+            <h4>Professional Installation</h4>
+            <p>Our expert technicians ensure a seamless installation process.</p>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/maintainance.png'%}" alt="24/7 Maintenance Support">
+            <h4>24/7 Maintenance Support</h4>
+            <p>We offer round-the-clock support to keep your internet running smoothly.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <img src="{% static 'images/ecommerce.jpeg'%}" alt="Ecommerce for Internet Products">
+            <h4>Ecommerce for Internet Products</h4>
+            <p>Browse and purchase a wide range of internet products on our ecommerce platform.</p>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/billing.jpeg'%}" alt="WiFi Billing Systems">
+            <h4>WiFi Billing Systems</h4>
+            <p>Manage your WiFi usage and billing with our efficient systems.</p>
+        </div>
+        <div class="col-4">
+            <img src="{% static 'images/web.jpeg'%}" alt="Web Hosting Services">
+            <h4>Web Hosting Services</h4>
+            <p>Reliable web hosting solutions to keep your online presence strong.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonial -->
+<div class="testimonial">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-3">
+                <i class="fa fa-quote-left"></i>
+                <p>GNET's internet speed is exceptional. The installation was quick and hassle-free.</p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <img src="{% static 'images/user-1.png'%}" alt="User 1">
+                <h3>Sean Parker</h3>
+            </div>
+            <div class="col-3">
+                <i class="fa fa-quote-left"></i>
+                <p>Excellent customer service and reliable internet connection. Highly recommend GNET.</p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <img src="{% static 'images/user-2.png'%}" alt="User 2">
+                <h3>Mike Smith</h3>
+            </div>
+            <div class="col-3">
+                <i class="fa fa-quote-left"></i>
+                <p>The best internet provider I've used. Fast, reliable, and great support.</p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <img src="{% static 'images/user-3.png'%}" alt="User 3">
+                <h3>Mabel Joe</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Information -->
+<div class="contact-info" id="contact">
+    <div class="small-container">
+        <h2 class="contact-title btn ">Contact Us</h2>
+        <p class="contact-address">
+            <strong>Address:</strong> Daystar University,Athi River, IDEAL
+        </p>
+        <p class="contact-phone">
+            <strong>Phone:</strong> 0795480710/0707091841
+        </p>
+        <p class="contact-email">
+            <strong>Email:</strong> gnetwifi2023@gmail.com
+        </p>
+    </div>
+</div>
+<!-- Brands -->
+<div class="brands">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-5">
+                <img src="{% static 'images/cisco.png'%}" alt="Brand 1">
+            </div>
+            <div class="col-5">
+                <img src="{% static 'images/mikrotik.png'%}" alt="Brand 2">
+            </div>
+            <div class="col-5">
+                <img src="{% static 'images/tenda.png'%}" alt="Brand 3">
+            </div>
+            <div class="col-5">
+                <img src="{% static 'images/tplink.png'%}" alt="Brand 4">
+            </div>
+            <div class="col-5">
+                <img src="{% static 'images/ubiquiti.png'%}" alt="Brand 5">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    /* styles.css */
+
+/* Contact Information Styles */
+.contact-info {
+   
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+}
+
+.contact-info::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 5px;
+    background-color: #fff;
+    top: 20px;
+}
+
+.contact-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.contact-address,
+.contact-phone,
+.contact-email {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.contact-address strong,
+.contact-phone strong,
+.contact-email strong {
+    font-weight: bold;
+}
+
+</style>
+{% endblock %}

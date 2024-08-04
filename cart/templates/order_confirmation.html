@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block content%}
+
+<style>
+    /* styles.css */
+
+/* Confirmation Page Styles */
+.confirmation-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.confirmation-title {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.confirmation-message {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.confirmation-container p {
+    font-size: 1rem;
+    color: #666;
+}
+
+
+</style>
+<div class="confirmation-container">
+    <h1 class="confirmation-title">Thank You!</h1>
+    <p class="confirmation-message">Your order has been received. We will contact you soon via email</p>
+</div>
+{% endblock %}

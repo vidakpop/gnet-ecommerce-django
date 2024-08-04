@@ -1,0 +1,317 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GNET | WIFI SERVICES</title>
+    <link rel="icon" type="image/x-icon" href="{%static 'images/logo.ico'%}" />
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <style>
+        .toast-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 1050;
+        }
+    
+        .toast {
+            display: none;
+            background-color: #842029;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.25rem 0.5rem rgba(red, green, blue, alpha);
+            opacity: 0.9;
+        }
+    
+        .toast-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #842029;
+            color: #fff;
+        }
+        .toast-body{
+            font-size: 0.875rem;
+        }
+        .btn-close{
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.25rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .cart-link {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cart-counter {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 0 5px;
+            font-size: 12px;
+            line-height: 20px;
+            min-width: 20px;
+            text-align: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {background-color: #f1f1f1}
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+        </style>
+        
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'index' %}"><img src="{% static 'images/logo.png'%}" alt="logo" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Products</a>
+                        <ul class="dropdown-content">
+                            <li><a href="{% url 'home' %}">All Products</a></li>
+                            {% for category in categories %}
+                            <li><a href="{% url 'category' category.name %}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Account</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <a href="{% url 'cart_summary' %}" class="cart-link">
+                <img src="{% static 'images/cart.png' %}" width="30px" height="30px">
+                <span class="cart-counter" id="cart_quantity">{{cart|length}}</span>
+            </a>
+            <img src="{%static 'images/menu.png'%}" class="menu-icon" onclick="menutoggle()">
+        </div>
+    </div>
+        <!-- Toast Container -->
+    <div aria-live="polite" aria-atomic="true" class="toast-container">
+        <div id="messageToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            
+            <div class="toast-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Single Products -->
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{product.image.url}}" width="100%" id="ProductImg">
+
+                
+
+            </div>
+            <div class="col-2">
+                <p>{{category.name}}</p>
+                <h1>{{product.name}}</h1>
+                
+                    {% if product.on_sale %}
+                    
+                    <!-- Product price-->
+                    <h4> <strike>Ksh.{{product.price}}</strike></h4>
+                    <h4>&nbsp;Ksh.{{product.sale_price}}</h4> 
+      
+                    {% else %}
+                      <h4>Ksh.{{product.price}}</h4>
+                      
+                    {% endif %}
+                
+                
+                <input type="number" value="1" id="qty-cart" min="1">
+                <button type="button" value="{{product.id}}" class="btn" id="add-cart">Add To Cart </button>
+                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <br>
+                <p>{{product.description}}</p> 
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Developer</h3>
+                <p>Contact the developer.</p>
+                <div class="app-logo">
+                   <a href="https://github.com/vidakpop"><img src="{%static 'images/github.png'%}" alt="Github"></a>
+                    
+                </div>
+            </div>
+            <div class="footer-col-2">
+                <img src="{%static 'images/logo.png'%}" alt="GNET Logo">
+                <p>Our mission is to provide the best internet services to our customers.</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Contacts</h3>
+                <ul>
+                    <li>Phone:0795480710/ 0707091841</li>
+                   
+                    <li>Email:gnetwifi2023@gmail.com</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyright 2024 - GNET WIFI SERVICES</p>
+    </div>
+</div>
+    <!-- javascript -->
+   
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else {
+                MenuItems.style.maxHeight = "0px"
+            }
+        }
+    </script>
+    <script>
+        //check if button is pressed
+        $(document).on('click','#add-cart',function(e){
+            e.preventDefault();
+            $.ajax({
+               type:'POST',
+               url:'{%url 'cart_add'%}',
+               data:{
+                    product_id:$('#add-cart').val(),
+                    product_qty:$('#qty-cart').val(),
+                    csrfmiddlewaretoken:'{{ csrf_token }}',
+                    action:'post'
+
+               },
+               success:function(json){
+                //console.log(json)
+                document.getElementById('cart_quantity').textContent = json.qty
+                location.reload();
+               },
+               error:function(xhr,errmsg,err){
+
+               }
+            });
+            });
+            // Get all input elements
+const inputs = document.querySelectorAll('input[type="number"]');
+
+// Add event listener to each input element
+inputs.forEach(input => {
+  input.addEventListener('input', () => {
+    if (input.value < 1) {
+      alert('Value cannot be less than 1');
+      input.value = 1;
+    }
+  });
+});
+// Add event listener to dropdown button
+document.querySelectorAll('.dropbtn').forEach(button => {
+    button.addEventListener('click', () => {
+        // Toggle dropdown content
+        button.nextElementSibling.classList.toggle('show');
+    });
+});
+
+// Add event listener to window to close dropdown on click outside
+window.addEventListener('click', event => {
+    if (!event.target.matches('.dropbtn')) {
+        // Close dropdown content
+        document.querySelectorAll('.dropdown-content').forEach(content => {
+            content.classList.remove('show');
+        });
+    }
+});
+        
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there are messages
+            if (document.querySelector('.toast-body div')) {
+                var toast = document.getElementById('messageToast');
+                toast.style.display='block';
+
+                setTimeout(function(){
+                    toast.style.display='none';
+                    }, 3000);
+                
+            }
+        });
+        function closeToast(){
+            var toast=document.getElementById('messageToast');
+            toast.style.display='none';
+        }
+    </script>
+
+    
+</body>
+
+</html>

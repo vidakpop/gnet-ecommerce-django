@@ -1,0 +1,152 @@
+{%extends 'base.html'%}
+{% load static %}
+{%block content%}
+
+
+
+<div class="small-container cart-page">
+    
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        {% if cart_products%}
+        {% for product in cart_products %}
+        <tr>
+            <td>
+                
+                <div class="cart-info">
+                    <img src="{{product.image.url}}">
+                    <div>
+                        <p>{{product}}</p>
+                        {% if product.on_sale %}
+                        <small>Price: Ksh.<strike>{{product.price}}</strike>&nbsp;{{product.sale_price}}</small>
+                        
+                        {% else %}
+                        <small>Price: Ksh.{{product.price}}</small>
+                        {% endif %}
+                        <br>
+                        <small> <button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product">Remove</button></small>
+                        
+                       <small> <button type="button" data-index="{{product.id}}" class="btn update-cart">Update</button></small>
+                    </div>
+                </div>
+            </td>
+            {% for key,value in quantities.items %}
+            {% if key == product.id|slugify%}
+            <td><input type="number" value="{{value}}" id="input{{product.id}}" min="1"></td>
+            {% endif %}
+            {% endfor %}
+            {% if product.on_sale %}
+            <td>Ksh.{{product.sale_price}}</td>
+            
+            {% else %}
+            <td>Ksh.{{product.price}}</td>
+            
+   
+            {% endif %}
+        </tr>
+             {%endfor%}
+             {% else %}
+             <br>
+             <tr>
+                <td colspan="3">Cart is empty</td>
+            </tr>
+             {% endif %}
+           <br>
+    </table>
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td>Ksh.{{totals}}</td>
+            </tr>
+            <tr>
+                <td>Misc</td>
+                <td>Ksh.0.00</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>Ksh.{{totals}}</td>
+            </tr>
+        </table>
+    </div>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+</div>
+
+
+
+    
+ <script>
+    //check if button is pressed
+    //updtaw
+    $(document).on('click','.update-cart',function(e){
+        
+        
+        e.preventDefault();
+        //grab product id
+        var productid=$(this).data('index');
+        $.ajax({
+           type:'POST',
+           url:'{%url 'cart_update'%}',
+           data:{
+                product_id:$(this).data('index'),
+                product_qty:$('#input' + productid).val(),
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                action:'post'
+
+           },
+           success:function(json){
+            //console.log(json)
+            //document.getElementById('cart_quantity').textContent = json.qty
+            location.reload();
+           },
+           error:function(xhr,errmsg,err){
+
+           }
+        });
+        });
+        // Delete item from cart
+        $(document).on('click','.delete-product',function(e){
+        
+        
+            e.preventDefault();
+            //grab product id
+            //var productid=$(this).data('index');
+            $.ajax({
+               type:'POST',
+               url:'{%url 'cart_delete'%}',
+               data:{
+                    product_id:$(this).data('index'),
+                    
+                    csrfmiddlewaretoken:'{{ csrf_token }}',
+                    action:'post'
+    
+               },
+               success:function(json){
+                //console.log(json)
+                //document.getElementById('cart_quantity').textContent = json.qty
+                location.reload();
+               },
+               error:function(xhr,errmsg,err){
+    
+               }
+            });
+            });
+            // Get all input elements
+const inputs = document.querySelectorAll('input[type="number"]');
+
+// Add event listener to each input element
+inputs.forEach(input => {
+  input.addEventListener('input', () => {
+    if (input.value < 1) {
+      alert('Value cannot be less than 1');
+      input.value = 1;
+    }
+  });
+});
+    
+</script>
+{% endblock %}
