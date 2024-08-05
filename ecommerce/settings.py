@@ -15,8 +15,6 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
-import django
-django.setup()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,9 +38,8 @@ CSRF_TRUSTED_ORIGINS=['https://gnet-ecommerce-django-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
-    
-    'django.contrib.admin',
     'jazzmin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
