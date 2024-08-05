@@ -14,7 +14,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -89,7 +88,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ['Postgres.DATABASE_URL'])
+    'default': dj_database_url.config(default=os.environ.get('Postgres.DATABASE_URL'),conn_max_age=1800)
 }
 
 
@@ -148,7 +147,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'cyberjiutsu@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ['PASSWORD']
+EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD')
 
 JAZZMIN_SETTINGS ={
     'site_header':"GNETADMIN system",
