@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,8 +30,8 @@ SECRET_KEY = 'django-insecure-!5+sa68067c3s=0bj1yjfyox-0e2i8du6^43#pnyj3l!3c^)*w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gnet-ecommerce-django-production.up.railway.app','https://gnet-ecommerce-django-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS=['gnet-ecommerce-django-production.up.railway.app','https://gnet-ecommerce-django-production.up.railway.app']
+ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS=[]
 
 
 # Application definition
@@ -84,19 +85,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-       #'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('DB_PASSWORD_YO'),
-        'HOST': 'postgres.railway.internal',
-        'PORT': '5432',
-    }
-}
 
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('Postgres.DATABASE_URL'),conn_max_age=1800)
+}
 
 
 # Password validation
