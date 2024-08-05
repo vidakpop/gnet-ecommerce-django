@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('Postgres.DATABASE_URL'),conn_max_age=1800)
+    'default': dj_database_url.config(default=os.environ['Postgres.DATABASE_URL'])
 }
 
 
@@ -147,7 +147,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'cyberjiutsu@gmail.com'
-EMAIL_HOST_PASSWORD = 'mdfa fnfu mevm mwgo'
+EMAIL_HOST_PASSWORD = os.environ['PASSWORD']
 
 JAZZMIN_SETTINGS ={
     'site_header':"GNETADMIN system",
