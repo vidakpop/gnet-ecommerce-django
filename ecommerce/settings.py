@@ -30,8 +30,8 @@ SECRET_KEY = 'django-insecure-!5+sa68067c3s=0bj1yjfyox-0e2i8du6^43#pnyj3l!3c^)*w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','gnet-ecommerce-django-production.up.railway.app','https://gnet-ecommerce-django-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS=['https://gnet-ecommerce-django-production.up.railway.app']
+ALLOWED_HOSTS = ['https://gnetwifiservices.systeme.io','127.0.0.1','gnet-ecommerce-django-production.up.railway.app','https://gnet-ecommerce-django-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS=['https://gnetwifiservices.systeme.io','https://gnet-ecommerce-django-production.up.railway.app']
 
 
 # Application definition
